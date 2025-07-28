@@ -1,0 +1,240 @@
+{
+  "metadata": {
+    "input_documents": [
+      "South of France - Restaurants and Hotels.pdf",
+      "South of France - Cuisine.pdf",
+      "South of France - History.pdf",
+      "South of France - Cities.pdf",
+      "South of France - Traditions and Culture.pdf",
+      "South of France - Tips and Tricks.pdf",
+      "South of France - Things to Do.pdf"
+    ],
+    "persona": "Travel Planner",
+    "job_to_be_done": "Plan a trip of 4 days for a group of 10 college friends.",
+    "processing_timestamp": "2025-07-28T13:35:27.722418"
+  },
+  "extracted_sections": [
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Culinary Delights",
+      "importance_rank": 1,
+      "page_number": 5
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Cévennes National Park",
+      "importance_rank": 2,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Wine Tasting",
+      "importance_rank": 3,
+      "page_number": 5
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Local Markets",
+      "importance_rank": 4,
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Cooking Classes",
+      "importance_rank": 5,
+      "page_number": 5
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Water Activities",
+      "importance_rank": 6,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Lake Serre-Ponçon",
+      "importance_rank": 7,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Outdoor Activities",
+      "importance_rank": 8,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Verdon Gorge",
+      "importance_rank": 9,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Pyrenees National Park",
+      "importance_rank": 10,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Dordogne River",
+      "importance_rank": 11,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Lake Sainte-Croix",
+      "importance_rank": 12,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Historical Sites",
+      "importance_rank": 13,
+      "page_number": 3
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Mont Ventoux",
+      "importance_rank": 14,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Mercantour National Park",
+      "importance_rank": 15,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Ardèche River",
+      "importance_rank": 16,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Ubaye River",
+      "importance_rank": 17,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Luberon Regional Park",
+      "importance_rank": 18,
+      "page_number": 4
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Boutique Shopping",
+      "importance_rank": 19,
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Educational Experiences",
+      "importance_rank": 20,
+      "page_number": 9
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "The Ultimate South of France Travel Companion: Your Comprehensive Guide to Packing,\nPlanning, and Exploring\nPlanning a trip to the South of France requires thoughtful preparation to ensure a\ncomfortable and enjoyable experience. This guide covers everything from packing essentials\nto travel tips, catering to all seasons and various activities. Whether you're traveling solo, with\nkids, or in a group, this guide will help you make the most of your trip.",
+      "page_number": 1
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Notebook:\nBring a notebook to jot down notes about the wines you taste.\nWater Bottle:\nStay hydrated by drinking water between tastings.\nAdditional Tips:\nPlan your wine tour route in advance and consider hiring a driver or\njoining a guided tour to avoid drinking and driving.\nTips and Tricks for Packing\nCheck the Weather:\nCheck the forecast before packing to ensure appropriate clothing.\nMake a Packing List:\nCreate a list to ensure nothing is forgotten. Cross oﬀ items as you\npack.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Additional Tips:\nBring a favorite stuﬀed animal or comfort item to help kids feel at\nhome. Consider packing a travel potty for young children.\nSpecial Considerations\nBeach Trips\nBeach Bag:\nA large, waterproof bag for essentials.\nTowels:\nLightweight, quick-drying beach towels.\nBeach Toys:\nBuckets, shovels, and toys for kids.\nSnorkeling Gear:\nBring your own gear for a better fit and comfort.\nAdditional Tips:\nPack a beach umbrella or tent for shade and a cooler for drinks and\nsnacks.",
+      "page_number": 7
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "General Packing Tips and Tricks\nLayering:\nThe weather can vary, so pack layers to stay comfortable in diﬀerent\ntemperatures.\nVersatile Clothing:\nChoose items that can be mixed and matched to create multiple\noutfits, helping you pack lighter.\nPacking Cubes:\nUse packing cubes to organize your clothes and maximize suitcase\nspace.\nRoll Your Clothes:\nRolling clothes saves space and reduces wrinkles.\nTravel-Sized Toiletries:\nBring travel-sized toiletries to save space and comply with\nairline regulatio...",
+      "page_number": 2
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Packing for All Seasons\nSpring (March to May)\nClothing:\nLight sweaters, long-sleeve shirts, t-shirts, and a light jacket or raincoat.\nFootwear:\nComfortable walking shoes and sandals.\nAccessories:\nSunglasses, a hat, and a small umbrella.\nAdditional Tips:\nSpring can be unpredictable, so be prepared for both sunny and rainy\ndays. Consider packing a lightweight scarf for cooler evenings.\nSummer (June to August)\nClothing:\nLightweight, breathable fabrics like cotton and linen.",
+      "page_number": 3
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Notebook:\nBring a notebook to jot down notes about the wines you taste.\nWater Bottle:\nStay hydrated by drinking water between tastings.\nAdditional Tips:\nPlan your wine tour route in advance and consider hiring a driver or\njoining a guided tour to avoid drinking and driving.\nTips and Tricks for Packing\nCheck the Weather:\nCheck the forecast before packing to ensure appropriate clothing.\nMake a Packing List:\nCreate a list to ensure nothing is forgotten. Cross oﬀ items as you\npack.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Notebook:\nBring a notebook to jot down notes about the wines you taste.\nWater Bottle:\nStay hydrated by drinking water between tastings.\nAdditional Tips:\nPlan your wine tour route in advance and consider hiring a driver or\njoining a guided tour to avoid drinking and driving.\nTips and Tricks for Packing\nCheck the Weather:\nCheck the forecast before packing to ensure appropriate clothing.\nMake a Packing List:\nCreate a list to ensure nothing is forgotten. Cross oﬀ items as you\npack.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Notebook:\nBring a notebook to jot down notes about the wines you taste.\nWater Bottle:\nStay hydrated by drinking water between tastings.\nAdditional Tips:\nPlan your wine tour route in advance and consider hiring a driver or\njoining a guided tour to avoid drinking and driving.\nTips and Tricks for Packing\nCheck the Weather:\nCheck the forecast before packing to ensure appropriate clothing.\nMake a Packing List:\nCreate a list to ensure nothing is forgotten. Cross oﬀ items as you\npack.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Notebook:\nBring a notebook to jot down notes about the wines you taste.\nWater Bottle:\nStay hydrated by drinking water between tastings.\nAdditional Tips:\nPlan your wine tour route in advance and consider hiring a driver or\njoining a guided tour to avoid drinking and driving.\nTips and Tricks for Packing\nCheck the Weather:\nCheck the forecast before packing to ensure appropriate clothing.\nMake a Packing List:\nCreate a list to ensure nothing is forgotten. Cross oﬀ items as you\npack.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Notebook:\nBring a notebook to jot down notes about the wines you taste.\nWater Bottle:\nStay hydrated by drinking water between tastings.\nAdditional Tips:\nPlan your wine tour route in advance and consider hiring a driver or\njoining a guided tour to avoid drinking and driving.\nTips and Tricks for Packing\nCheck the Weather:\nCheck the forecast before packing to ensure appropriate clothing.\nMake a Packing List:\nCreate a list to ensure nothing is forgotten. Cross oﬀ items as you\npack.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Cuisine.pdf",
+      "refined_text": "In addition to dining at top restaurants, there are several culinary experiences you should\nconsider:\nCooking Classes: Many towns and cities in the South of France oﬀer cooking classes\nwhere you can learn to prepare traditional dishes like bouillabaisse, ratatouille, and\ntarte tropézienne. These classes are a great way to immerse yourself in the local\nculture and gain hands-on experience with regional recipes. Some classes even\ninclude a visit to a local market to shop for fresh ingredients.",
+      "page_number": 6
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "refined_text": "Family-Friendly Activities\nThe South of France oﬀers a variety of activities that are perfect for families with children:\nTheme Parks and Attractions\nAntibes: Visit Marineland for marine shows and an aquarium.\nFréjus: Cool oﬀ at Aqualand water park.\nVilleneuve-Loubet: Enjoy quirky attractions at Le Village des Fous.\nMonteux: Spend a day at Parc Spirou, a theme park based on the famous comic book\ncharacter.\nLa Palmyre: Explore the La Palmyre Zoo, home to a wide variety of animals.",
+      "page_number": 9
+    },
+    {
+      "document": "South of France - History.pdf",
+      "refined_text": "Arles, located on the banks of the Rhône River, is renowned for its Roman and Romanesque\nmonuments. The city was an important Roman settlement and later became a center of\nChristian pilgrimage.\nKey Historical Sites in Arles\nArles Amphitheatre: This Roman amphitheater, built in the 1st century AD, is still used\nfor events such as bullfights and concerts. It is one of the best-preserved Roman\nstructures in France.\nChurch of St.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Packing for Kids\nClothing\nComfortable Wear:\nT-shirts, shorts, pants, dresses, pajamas, and underwear.\nLayering:\nDepending on the season, pack sweaters, jackets, and hats.\nSwimwear:\nSwimsuits and cover-ups for beach or pool days.\nAccessories:\nA sun hat, sunglasses, and a lightweight jacket.\nAdditional Tips:\nPack extra clothing for kids, as they may need more changes of\nclothes than adults.\nEssentials\nDiapers and Wipes:\nFor babies or toddlers, pack enough diapers and wipes.",
+      "page_number": 6
+    },
+    {
+      "document": "South of France - Restaurants and Hotels.pdf",
+      "refined_text": "Comprehensive Guide to Restaurants and Hotels in the South of France\nThe South of France, known for its stunning landscapes, rich cultural heritage, and exquisite\ncuisine, is a dream destination for travelers. From the glamorous beaches of the French\nRiviera to the charming villages of Provence, this region oﬀers a diverse array of experiences.\nWhether you're looking for budget-friendly options, family-friendly spots, upscale dining, or\nluxurious experiences, this guide will help you find the pe...",
+      "page_number": 1
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Packing for a trip to the South of France involves considering the season, planned activities,\nand the needs of both adults and children. By following this comprehensive guide and\nincorporating the tips and tricks provided, you'll be well-prepared for a comfortable and\nenjoyable trip. Remember to pack light, versatile clothing, and essential items to make the\nmost of your travel experience. Bon voyage!",
+      "page_number": 9
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Additional Tips:\nBring a favorite stuﬀed animal or comfort item to help kids feel at\nhome. Consider packing a travel potty for young children.\nBeach Trips\nBeach Bag:\nA large, waterproof bag for essentials.\nTowels:\nLightweight, quick-drying beach towels.\nBeach Toys:\nBuckets, shovels, and toys for kids.\nSnorkeling Gear:\nBring your own gear for a better fit and comfort.\nAdditional Tips:\nPack a beach umbrella or tent for shade and a cooler for drinks and\nsnacks.",
+      "page_number": 7
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Additional Tips:\nBring a favorite stuﬀed animal or comfort item to help kids feel at\nhome. Consider packing a travel potty for young children.\nSpecial Considerations\nBeach Trips\nBeach Bag:\nA large, waterproof bag for essentials.\nTowels:\nLightweight, quick-drying beach towels.\nBeach Toys:\nBuckets, shovels, and toys for kids.\nSnorkeling Gear:\nBring your own gear for a better fit and comfort.\nAdditional Tips:\nPack a beach umbrella or tent for shade and a cooler for drinks and\nsnacks.",
+      "page_number": 7
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Additional Tips:\nBring a favorite stuﬀed animal or comfort item to help kids feel at\nhome. Consider packing a travel potty for young children.\nSpecial Considerations\nBeach Trips\nBeach Bag:\nA large, waterproof bag for essentials.\nTowels:\nLightweight, quick-drying beach towels.\nBeach Toys:\nBuckets, shovels, and toys for kids.\nSnorkeling Gear:\nBring your own gear for a better fit and comfort.\nAdditional Tips:\nPack a beach umbrella or tent for shade and a cooler for drinks and\nsnacks.",
+      "page_number": 7
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Additional Tips:\nBring a favorite stuﬀed animal or comfort item to help kids feel at\nhome. Consider packing a travel potty for young children.\nSpecial Considerations\nBeach Trips\nBeach Bag:\nA large, waterproof bag for essentials.\nTowels:\nLightweight, quick-drying beach towels.\nBeach Toys:\nBuckets, shovels, and toys for kids.\nSnorkeling Gear:\nBring your own gear for a better fit and comfort.\nAdditional Tips:\nPack a beach umbrella or tent for shade and a cooler for drinks and\nsnacks.",
+      "page_number": 7
+    }
+  ]
+}

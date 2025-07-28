@@ -64,11 +64,23 @@ Any Persona Input → Pattern Recognition → Multi-Document Processing → Adap
 # 1. Build the container
 docker build -t adobe-1b .
 
-# 2. Run with input data
-docker run -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output adobe-1b
+# 2. Run with input data and specify test case (recommended)
+docker run -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output adobe-1b python main_1b.py --input /app/input --output /app/output --test-case /app/input/travel_planner_case.json
 
-# 3. Check results
+# 3. Alternative: Run with auto-detection (if main_1b.py supports it)
+docker run -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output adobe-1b python main_1b.py --input /app/input --output /app/output
+
+# 4. Check results
 cat output/challenge1b_output.json
+```
+
+### Windows Docker Commands
+```powershell
+# 1. Run with test case (Windows PowerShell)
+docker run -v ${PWD}/input:/app/input -v ${PWD}/output:/app/output adobe-1b python main_1b.py --input /app/input --output /app/output --test-case /app/input/travel_planner_case.json
+
+# 2. Check results
+Get-Content .\output\challenge1b_output.json
 ```
 
 ### Local Development Setup
@@ -79,16 +91,10 @@ pip install -r requirements.txt
 # 2. Setup models (first time only)
 python scripts/setup_models_1b.py
 
-# 3. Run processing locally - Travel Planner
-python main_1b.py --input "input\1\PDFs" --output "output" --test-case "travel_planner_case.json"
+# 3. Run processing with Travel Planner case (PDFs in input/ directory)
+python main_1b.py --input "input" --output "output" --test-case "input/travel_planner_case.json"
 
-# 4. Run processing locally - HR Professional  
-python main_1b.py --input "input\2\PDFs" --output "output" --test-case "hr_professional_case.json"
-
-# 5. Run processing locally - Food Contractor
-python main_1b.py --input "input\3\PDFs" --output "output"
-
-# 6. Check results
+# 4. Check results
 cat output/challenge1b_output.json
 ```
 
@@ -100,25 +106,24 @@ pip install -r requirements.txt
 # 2. Setup models
 python scripts\setup_models_1b.py
 
-# 3. Run processing - Travel Planner
-python main_1b.py --input "input\1\PDFs" --output "output" --test-case "travel_planner_case.json"
+# 3. Run processing with Travel Planner case (PDFs in input\ directory)
+python main_1b.py --input "input" --output "output" --test-case "input\travel_planner_case.json"
 
-# 4. Run processing - HR Professional
-python main_1b.py --input "input\2\PDFs" --output "output" --test-case "hr_professional_case.json"
-
-# 5. Run processing - Food Contractor
-python main_1b.py --input "input\3\PDFs" --output "output"
-
-# 6. View results
+# 4. View results
 Get-Content .\output\challenge1b_output.json
 ```
 
 ### Input Directory Structure
 ```
 input/
-├── 1/PDFs/          # Collection 1: Travel Planning documents + travel_planner_case.json
-├── 2/PDFs/          # Collection 2: HR/Adobe Acrobat docs + hr_professional_case.json  
-└── 3/PDFs/          # Collection 3: Food/Recipe documents + food_contractor_case.json
+├── South of France - Cities.pdf
+├── South of France - Cuisine.pdf
+├── South of France - History.pdf
+├── South of France - Restaurants and Hotels.pdf
+├── South of France - Things to Do.pdf
+├── South of France - Tips and Tricks.pdf
+├── South of France - Traditions and Culture.pdf
+└── travel_planner_case.json
 ```
 
 ### Expected Output Format (Sample Compliant)
@@ -163,7 +168,7 @@ input/
 
 ### Collection 1: Travel Planner
 ```bash
-python main_1b.py --input "input\1\PDFs" --output "output" --test-case "travel_planner_case.json"
+python main_1b.py --input "input" --output "output" --test-case "input/travel_planner_case.json"
 # ✅ Processing completed in 11.52 seconds
 # ✅ Persona: "Travel Planner" preserved
 # ✅ Job: "Plan a trip of 4 days for a group of 10 college friends"
@@ -195,10 +200,11 @@ python main_1b.py --input "input\3\PDFs" --output "output"
 # Test build
 docker build -t adobe-1b .
 
-# Test with sample data
-mkdir -p test_input/1/PDFs test_output
-cp sample.pdf test_input/1/PDFs/
-docker run -v $(pwd)/test_input:/app/input -v $(pwd)/test_output:/app/output adobe-1b
+# Test with your current data structure
+docker run -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output adobe-1b python main_1b.py --input /app/input --output /app/output --test-case /app/input/travel_planner_case.json
+
+# Check if output was generated
+ls -la output/
 ```
 
 ### Local Development Issues
@@ -278,13 +284,10 @@ pip install -r requirements.txt
 python scripts/setup_models_1b.py
 
 # 4. Test with Travel Planner
-python main_1b.py --input "input\1\PDFs" --output "output" --test-case "travel_planner_case.json" --debug
+python main_1b.py --input "input" --output "output" --test-case "input/travel_planner_case.json" --debug
 
-# 5. Test with HR Professional
-python main_1b.py --input "input\2\PDFs" --output "output" --test-case "hr_professional_case.json"
-
-# 6. Test with Food Contractor  
-python main_1b.py --input "input\3\PDFs" --output "output"
+# 5. Test with other personas (if you have other case files)
+# python main_1b.py --input "input" --output "output" --test-case "input/other_case.json"
 ```
 
 ### Testing and Validation
@@ -320,11 +323,11 @@ print('✅ Dynamic persona system working!')
 nano configs/model_config_1b.yaml
 
 # Test persona changes
-python main_1b.py --input "input\1\PDFs" --debug
+python main_1b.py --input "input" --debug
 
 # Test different personas (system adapts automatically)
 echo '{"persona": "Wedding Photographer", "job_to_be_done": "Create a photo timeline"}' > test_case.json
-python main_1b.py --input "input\1\PDFs" --test-case "test_case.json"
+python main_1b.py --input "input" --test-case "test_case.json"
 
 # Rebuild Docker with changes
 docker build -t adobe-1b .

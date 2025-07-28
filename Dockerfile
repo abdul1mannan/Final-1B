@@ -67,6 +67,7 @@ COPY configs/ /app/configs/
 COPY main_1b.py /app/
 
 # Set Python path and NLTK data path
+ENV PYTHONPATH="/app/src"
 ENV PYTHONPATH="/app/src:$PYTHONPATH"
 ENV NLTK_DATA="/app/models/nltk_data"
 
@@ -88,7 +89,9 @@ HEALTHCHECK --interval=30s --timeout=15s --start-period=10s --retries=3 \
 import sys; \
 sys.path.insert(0, '/app/src'); \
 try: \
-    from persona_intelligence import PersonaManager, RelevanceScorer, MultiDocumentProcessor; \
+    from persona_intelligence.persona_manager import PersonaManager; \
+    from persona_intelligence.relevance_scorer import RelevanceScorer; \
+    from persona_intelligence.document_analyzer import DocumentAnalyzer; \
     from pdf_intelligence.parser import PDFOutlineExtractor; \
     print('Container healthy: Round 1B Persona Intelligence loaded'); \
     exit(0); \

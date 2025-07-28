@@ -22,7 +22,7 @@ tokenizers==0.21.2             # Fast tokenization
 scikit-learn==1.7.0          # TF-IDF, cosine similarity, zero-shot classification
 pandas==2.3.1                 # Data manipulation (lighter than 2.2.3)
 numpy==2.2.6                  # Numerical computing (compatible with all packages)
-scipy==1.16.0                 # Scientific computing (compatible version)
+scipy==1.13.1                 # Scientific computing (compatible version)
 nltk==3.9.1                    # Universal text preprocessing
 spacy==3.8.7                  # Advanced NLP (without large models)
 
