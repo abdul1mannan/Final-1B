@@ -1,0 +1,103 @@
+# Adobe Hackathon 2025 - PDF Outline Extractor
+# .gitignore - Essential entries only
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.env
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ML Models & Caches (Downloaded at runtime)
+models/
+*.pkl
+*.pt
+*.pth
+*.bin
+*.safetensors
+transformers_cache/
+huggingface_cache/
+
+# Project Output & Processing
+docs/
+Sample Output/
+benchmark_results.yaml
+model_info.yaml
+*_intermediate.json
+batch_summary.json
+
+
+# Development & Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Logs & Temporary Files
+*.log
+logs/
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Environment Variables
+.env.local
+*.env
+
+# Docker
+.dockerignore
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Additional essentials
+*.pyc
+.Python
+*.sqlite3
+*.db
+
+# Docker build context
+.dockerignore
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Configuration secrets
+config.local.yaml
+secrets.yaml
+
+# Cache directories
+.cache/
+cache/
+

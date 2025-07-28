@@ -1,0 +1,555 @@
+# Adobe Hackathon Round 1B - Universal Persona-Driven Document Intelligence Configuration
+# Includes all 1A PDF processing settings plus 1B persona intelligence
+# Optimized for generalization across all domains, personas, and jobs-to-be-done
+
+# ===================================================================
+# ROUND 1B PERFORMANCE CONSTRAINTS (Strict Requirements)
+# ===================================================================
+performance:
+  max_processing_time: 60         # seconds (Round 1B allows 60s vs 1A's 10s)
+  max_memory_usage: 1024          # MB (Round 1B allows 1GB vs 1A's 8GB)
+  max_model_size: 1000            # MB (Round 1B allows 1GB vs 1A's 200MB)
+  cpu_cores: 4                    # Parallel processing limit
+  max_documents: 10               # Maximum documents per batch
+  max_workers: 4                  # Maximum parallel workers
+  
+  # Performance targets (based on research)
+  target_processing_speed: 15     # pages per second (PyMuPDF capability)
+  target_throughput: 6            # documents per minute
+  memory_safety_margin: 100      # MB to keep as buffer
+  
+  # Optimization settings
+  enable_parallel_processing: true
+  enable_caching: true
+  enable_streaming: true          # For large documents
+  garbage_collection_frequency: 5 # Clean up every 5 documents
+
+# ===================================================================
+# 1A PDF PROCESSING CORE (Proven TinyBERT Pipeline)
+# ===================================================================
+tinybert:
+  model_name: "huawei-noah/TinyBERT_General_4L_312D"
+  model_path: "./models/tinybert/"
+  cache_dir: "./models/cache/"
+  max_length: 128               # Heading text limit (faster inference)
+  batch_size: 1                 # Memory efficient
+  confidence_threshold: 0.75    # ML classification cutoff
+  device: "cpu"                 # No GPU dependency
+
+heading_detection:
+  # Font size analysis (when available)
+  font_thresholds:
+    h1_min_ratio: 1.4           # 40% larger than body
+    h2_min_ratio: 1.25          # 25% larger than body
+    h3_min_ratio: 1.1           # 10% larger than body
+    body_font_percentile: 50    # Median font size as baseline
+    
+  # Position-based rules  
+  position_rules:
+    left_margin_max: 100        # Pixels from left edge
+    top_spacing_min: 20         # Minimum space above heading
+    bottom_spacing_min: 10      # Minimum space below heading
+    
+  # Numbering patterns (language agnostic)
+  numbering_patterns:
+    - "^\\d+\\.\\s+"            # "1. ", "2. "
+    - "^\\d+\\.\\d+\\s+"        # "1.1 ", "2.3 "
+    - "^\\d+\\.\\d+\\.\\d+\\s+" # "1.1.1 "
+    - "^Chapter\\s+\\d+"        # "Chapter 1"
+    - "^Section\\s+\\d+"        # "Section 2"
+    - "^Part\\s+\\d+"           # "Part I"
+    - "^第\\d+章"               # Japanese chapters
+    - "^الفصل\\s+\\d+"          # Arabic chapters
+    
+  # Keyword indicators
+  heading_keywords:
+    - "introduction"
+    - "conclusion"
+    - "background"
+    - "methodology"
+    - "results"
+    - "discussion"
+    - "references"
+    - "appendix"
+    - "abstract"
+    - "summary"
+
+title_extraction:
+  # Multi-strategy title detection
+  strategies:
+    metadata_priority: 1        # Try PDF metadata first
+    first_page_priority: 2      # Analyze first page layout
+    font_analysis_priority: 3   # Largest font detection
+    
+  validation:
+    min_length: 5               # Minimum title characters
+    max_length: 200             # Maximum title characters
+    max_words: 20               # Maximum title words
+
+text_extraction:
+  extract_fonts: true           # Extract font metadata (critical for heading detection)
+  extract_positions: true       # Extract position data (critical for layout analysis)
+  min_text_length: 1           # Minimum characters to process
+  max_pages: 50                # Hackathon constraint
+
+validation:
+  max_title_length: 200        # Hackathon constraint
+  max_heading_length: 200      # Prevent memory issues
+  min_heading_length: 2        # Filter noise
+  max_outline_entries: 500     # Prevent excessive output
+  max_pages: 50               # Match hackathon constraint
+
+fallbacks:
+  enable_sklearn_backup: true   # RandomForest if TinyBERT fails
+  enable_rules_only: true       # Pure rules if all ML fails
+  ocr_trigger_threshold: 50     # Chars/page for future OCR
+  max_fallback_time: 2          # Seconds for fallback processing
+
+# MULTILINGUAL SUPPORT
+multilingual:
+  normalize_unicode: true       # Handle special characters
+  detect_language: false        # Skip language detection (saves time)
+  supported_scripts:
+    - "latin"                   # English, French, German, etc.
+    - "cjk"                     # Chinese, Japanese, Korean  
+    - "arabic"                  # Arabic, Hebrew
+    - "cyrillic"                # Russian, Bulgarian, etc.
+
+# ===================================================================
+# 1B ENHANCEMENTS: STATIC EMBEDDING MODEL (400x Faster)
+# ===================================================================
+static_embeddings:
+  # Primary model (CPU-optimized, 400x faster inference)
+  model_name: "sentence-transformers/static-retrieval-mrl-en-v1"
+  model_path: "./models/static_embeddings/"
+  cache_dir: "./models/cache/"
+  
+  # Backup lightweight model
+  backup_model: "all-MiniLM-L6-v2"
+  
+  # Performance settings
+  batch_size: 32                  # Optimal for static embeddings
+  max_length: 256                 # Shorter for speed
+  device: "cpu"                   # No GPU dependency
+  truncate_dim: 256               # Dimension reduction for speed
+  
+  # Confidence thresholds
+  similarity_threshold: 0.7       # Minimum similarity for relevance
+  confidence_threshold: 0.6       # Minimum confidence for decisions
+
+# ===================================================================
+# 1B ENHANCEMENTS: UNIVERSAL PERSONA INTELLIGENCE
+# ===================================================================
+# ===================================================================
+persona_intelligence:
+  # Universal persona categorization (works across all industries)
+  universal_persona_types:
+    learner:
+      keywords: ["student", "learner", "researcher", "analyst", "trainee", "scholar"]
+      preferences: ["methodology", "examples", "step-by-step", "concepts", "fundamentals"]
+      detail_level: "comprehensive"
+      reading_speed: "moderate"
+      focus_areas: ["understanding", "analysis", "learning", "research"]
+      
+    decision_maker:
+      keywords: ["executive", "manager", "ceo", "director", "entrepreneur", "leader"]
+      preferences: ["summary", "key findings", "recommendations", "outcomes", "impact"]
+      detail_level: "summary"
+      reading_speed: "fast"
+      focus_areas: ["results", "decisions", "strategy", "roi"]
+      
+    practitioner:
+      keywords: ["engineer", "doctor", "lawyer", "consultant", "specialist", "developer"]
+      preferences: ["procedures", "guidelines", "best practices", "implementation", "tools"]
+      detail_level: "detailed"
+      reading_speed: "focused"
+      focus_areas: ["implementation", "methods", "techniques", "practice"]
+      
+    communicator:
+      keywords: ["journalist", "marketer", "writer", "reporter", "salesperson", "presenter"]
+      preferences: ["stories", "examples", "data", "trends", "insights", "evidence"]
+      detail_level: "balanced"
+      reading_speed: "varied"
+      focus_areas: ["narratives", "communication", "persuasion", "engagement"]
+      
+    general:
+      keywords: ["user", "person", "individual", "professional", "worker"]
+      preferences: ["overview", "main points", "practical information"]
+      detail_level: "moderate"
+      reading_speed: "average"
+      focus_areas: ["general understanding", "practical application"]
+  
+  # Universal job analysis patterns (works for any task)
+  universal_job_patterns:
+    research:
+      keywords: ["research", "review", "analysis", "study", "investigate", "examine", "explore"]
+      output_type: "comprehensive"
+      priority_sections: ["methodology", "data", "results", "analysis", "findings"]
+      detail_level: "detailed"
+      time_sensitivity: "low"
+      
+    summarize:
+      keywords: ["summarize", "overview", "brief", "highlights", "key points", "digest"]
+      output_type: "concise"
+      priority_sections: ["summary", "conclusions", "key findings", "overview"]
+      detail_level: "summary"
+      time_sensitivity: "medium"
+      
+    learn:
+      keywords: ["learn", "study", "understand", "master", "prepare", "exam", "course"]
+      output_type: "educational"
+      priority_sections: ["concepts", "examples", "definitions", "practice", "fundamentals"]
+      detail_level: "comprehensive"
+      time_sensitivity: "low"
+      
+    decide:
+      keywords: ["decide", "choose", "select", "recommend", "evaluate", "compare", "assess"]
+      output_type: "actionable"
+      priority_sections: ["recommendations", "comparisons", "pros cons", "outcomes", "options"]
+      detail_level: "summary"
+      time_sensitivity: "high"
+      
+    create:
+      keywords: ["create", "develop", "build", "design", "implement", "write", "produce"]
+      output_type: "instructional"
+      priority_sections: ["procedures", "methods", "examples", "templates", "guidelines"]
+      detail_level: "detailed"
+      time_sensitivity: "medium"
+      
+    communicate:
+      keywords: ["present", "explain", "share", "report", "communicate", "discuss"]
+      output_type: "narrative"
+      priority_sections: ["stories", "examples", "data", "visuals", "key messages"]
+      detail_level: "balanced"
+      time_sensitivity: "medium"
+  
+  # Persona matching configuration
+  persona_matching:
+    semantic_weight: 0.6          # 60% based on meaning similarity
+    keyword_weight: 0.4           # 40% based on exact word matches
+    min_confidence: 0.3           # Minimum 30% confidence required
+    fallback_to_general: true     # Use 'general' if no match found
+    
+  # Job analysis configuration
+  job_analysis:
+    keyword_extraction_limit: 20  # Max keywords to extract from job description
+    category_confidence_threshold: 0.5
+    multi_intent_support: true    # Jobs can have multiple intents
+    time_sensitivity_keywords: ["urgent", "quickly", "asap", "immediate", "deadline"]
+    complexity_indicators: ["comprehensive", "detailed", "thorough", "complete", "in-depth"]
+
+# ===================================================================
+# MULTI-CRITERIA DECISION ANALYSIS (MCDA) - Universal Scoring
+# ===================================================================
+mcda_scoring:
+  # Research-based criteria weights (adaptable per persona/job)
+  criteria_weights:
+    semantic_relevance: 0.40      # Most important: content relevance to job
+    persona_alignment: 0.25       # How well content matches persona preferences
+    content_quality: 0.20         # Readability, completeness, authority
+    section_importance: 0.10      # Document structure significance
+    recency: 0.05                 # Time relevance (less critical for most tasks)
+  
+  # Adaptive weights based on job type
+  job_specific_weights:
+    research:
+      semantic_relevance: 0.45
+      content_quality: 0.25
+      persona_alignment: 0.20
+      section_importance: 0.10
+      
+    decide:
+      semantic_relevance: 0.35
+      persona_alignment: 0.30
+      content_quality: 0.25
+      recency: 0.10
+      
+    learn:
+      content_quality: 0.35
+      semantic_relevance: 0.30
+      persona_alignment: 0.25
+      section_importance: 0.10
+      
+    summarize:
+      semantic_relevance: 0.40
+      section_importance: 0.30
+      persona_alignment: 0.20
+      content_quality: 0.10
+  
+  # Scoring thresholds
+  thresholds:
+    min_section_relevance: 0.3    # Minimum score for section inclusion
+    min_subsection_relevance: 0.4 # Higher threshold for subsections
+    max_sections_per_document: 10 # Limit sections per document
+    max_total_sections: 50        # Total sections across all documents
+    quality_floor: 0.2            # Minimum quality score
+
+# ===================================================================
+# UNIVERSAL DOCUMENT PROCESSING (Domain-Agnostic)
+# ===================================================================
+document_processing:
+  # PDF processing settings (optimized for speed)
+  pdf_processing:
+    use_pymupdf: true             # Primary processor (15-30 pages/sec)
+    use_pdfplumber: true          # For complex tables
+    extract_tables: true
+    extract_images: false         # Skip images for speed
+    preserve_layout: true
+    
+  # Universal heading detection (works across all domains)
+  heading_detection:
+    # Universal patterns that work across all document types
+    universal_patterns:
+      - "^(abstract|summary|executive summary|overview)"
+      - "^(introduction|background|overview|preface)"
+      - "^(methodology|methods|approach|process|procedure)"
+      - "^(results|findings|outcomes|analysis|data)"
+      - "^(discussion|interpretation|implications)"
+      - "^(conclusion|conclusions|summary|final)"
+      - "^(recommendations|next steps|action items)"
+      - "^(references|bibliography|sources|citations)"
+      
+    # Section importance weights (universal across domains)
+    section_importance:
+      level_weights:
+        h1: 1.0                   # Top level headings
+        h2: 0.8                   # Major sections
+        h3: 0.6                   # Subsections
+        h4: 0.4                   # Sub-subsections
+        title: 1.0                # Document titles
+        abstract: 0.95            # Always high importance
+        summary: 0.9              # Always important
+        conclusion: 0.85          # Always important
+        introduction: 0.7         # Context setting
+        
+    # Universal importance keywords
+    importance_keywords:
+      high: ["key", "important", "critical", "main", "primary", "essential", "major"]
+      medium: ["significant", "notable", "relevant", "substantial", "considerable"]
+      summary: ["summary", "overview", "highlights", "brief", "recap", "digest"]
+      conclusion: ["conclusion", "findings", "results", "outcomes", "implications"]
+      data: ["table", "figure", "chart", "data", "statistics", "metrics", "numbers"]
+
+# ===================================================================
+# UNIVERSAL CONTENT ANALYSIS (No Domain Hardcoding)
+# ===================================================================
+content_analysis:
+  # Universal content type detection
+  content_type_indicators:
+    financial:
+      patterns: ['\$[\d,]+', '\d+%', 'revenue', 'profit', 'cost', 'budget', 'ROI']
+      boost_factor: 1.2
+      
+    technical:
+      patterns: ['version\s+\d+', 'API', 'system', 'code', 'software', 'algorithm']
+      boost_factor: 1.1
+      
+    academic:
+      patterns: ['hypothesis', 'methodology', 'p\s*<\s*0\.05', 'significant', 'correlation']
+      boost_factor: 1.3
+      
+    educational:
+      patterns: ['concept', 'definition', 'example', 'exercise', 'chapter', 'lesson']
+      boost_factor: 1.1
+      
+    business:
+      patterns: ['strategy', 'market', 'customer', 'competition', 'growth', 'analysis']
+      boost_factor: 1.1
+  
+  # Universal readability calculation
+  readability:
+    use_flesch_reading_ease: true
+    use_flesch_kincaid_grade: true
+    sentence_length_weight: 0.3
+    syllable_complexity_weight: 0.4
+    word_difficulty_weight: 0.3
+    normalize_to_unit_scale: true  # Convert to 0-1 scale
+    
+  # Universal entity recognition patterns
+  entity_patterns:
+    dates: '\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b|\b\d{4}\b'
+    numbers: '\b\d+(?:,\d{3})*(?:\.\d+)?\b'
+    percentages: '\b\d+(?:\.\d+)?%\b'
+    money: '\$\b\d+(?:,\d{3})*(?:\.\d+)?\b'
+    emails: '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    urls: 'https?://[^\s]+'
+
+# ===================================================================
+# MULTI-DOCUMENT PROCESSING (Optimized for Performance)
+# ===================================================================
+multi_document:
+  # Processing strategy
+  processing_mode: "parallel"     # "parallel" or "sequential"
+  timeout_per_document: 15       # seconds per document
+  memory_limit_per_document: 200 # MB per document
+  
+  # Cross-document analysis
+  enable_cross_document_analysis: true
+  similarity_threshold: 0.7      # For grouping similar sections
+  deduplication_threshold: 0.9   # For removing near-duplicates
+  
+  # Output optimization
+  max_extracted_sections: 20     # Limit for main output
+  max_subsection_analysis: 50    # Limit for detailed analysis
+  section_text_limit: 1000       # Max characters per section
+  
+  # Performance optimization
+  use_document_caching: true
+  cache_embeddings: true
+  batch_process_embeddings: true
+  stream_large_documents: true   # For documents >5MB
+
+# ===================================================================
+# UNIVERSAL RELEVANCE SCORING (Domain-Independent)
+# ===================================================================
+relevance_scoring:
+  # Semantic similarity (universal approach)
+  semantic_similarity:
+    use_static_embeddings: true   # 400x faster than transformers
+    fallback_to_tfidf: true       # If embeddings fail
+    cache_embeddings: true        # Cache for performance
+    similarity_metric: "cosine"   # cosine, euclidean, manhattan
+    
+  # Keyword relevance (universal patterns)
+  keyword_relevance:
+    exact_match_bonus: 1.5        # Boost for exact keyword matches
+    partial_match_penalty: 0.8    # Penalty for partial matches
+    case_sensitive: false         # Case-insensitive matching
+    stemming_enabled: true        # Use word stems
+    synonym_expansion: false      # Disable for speed
+    
+  # Content quality assessment (universal metrics)
+  content_quality:
+    readability_weight: 0.4       # How easy to read
+    completeness_weight: 0.3      # How complete the information
+    authority_weight: 0.3         # How authoritative the source
+    
+    # Quality indicators (universal)
+    quality_indicators:
+      high_quality: ["peer-reviewed", "published", "official", "verified", "certified"]
+      medium_quality: ["report", "analysis", "study", "research", "documentation"]
+      low_quality: ["blog", "opinion", "personal", "unverified", "draft"]
+
+# ===================================================================
+# ERROR HANDLING & GRACEFUL DEGRADATION
+# ===================================================================
+error_handling:
+  max_retries: 3
+  retry_delay: 1.0              # seconds
+  timeout_strategy: "graceful_degradation"
+  
+  # Fallback modes (in order of preference)
+  fallback_modes:
+    - "static_embeddings_only"   # Use only static embeddings
+    - "tfidf_similarity_only"    # Fall back to TF-IDF
+    - "keyword_matching_only"    # Simple keyword matching
+    - "structural_analysis_only" # Just use document structure
+    
+  # Memory management
+  memory_management:
+    cleanup_frequency: 5          # Clean up every 5 documents
+    force_gc_threshold: 800       # Force garbage collection at 800MB
+    enable_memory_monitoring: true
+    emergency_cleanup_threshold: 950  # Emergency cleanup at 950MB
+    
+  # Error recovery
+  error_recovery:
+    skip_failed_documents: true   # Continue processing other documents
+    partial_results_acceptable: true  # Accept partial results
+    minimum_success_rate: 0.6     # Need 60% success rate minimum
+
+# ===================================================================
+# LOGGING & MONITORING (Production-Ready)
+# ===================================================================
+logging:
+  level: "INFO"                   # DEBUG, INFO, WARNING, ERROR
+  enable_performance_logging: true
+  enable_memory_logging: true
+  enable_error_logging: true
+  
+  # Log files
+  log_files:
+    main: "logs/persona_intelligence_1b.log"
+    performance: "logs/performance_1b.log"
+    errors: "logs/errors_1b.log"
+    memory: "logs/memory_usage_1b.log"
+    
+  # Log rotation
+  log_rotation:
+    max_size_mb: 10
+    backup_count: 5
+    
+  # Monitoring thresholds
+  monitoring_thresholds:
+    memory_warning: 700           # MB
+    memory_critical: 900          # MB
+    processing_time_warning: 45   # seconds
+    processing_time_critical: 55  # seconds
+
+# ===================================================================
+# UNIVERSAL OUTPUT FORMAT (Standardized Across All Domains)
+# ===================================================================
+output_format:
+  # JSON structure control
+  include_metadata: true
+  include_score_breakdown: true
+  include_confidence_scores: true
+  include_processing_stats: true
+  
+  # Content limits
+  max_section_title_length: 100
+  max_content_snippet_length: 500
+  max_entities_per_section: 15
+  max_keywords_per_section: 10
+  
+  # Required fields (validation)
+  required_fields:
+    - "metadata"
+    - "extracted_sections"
+    - "subsection_analysis"
+    
+  section_required_fields:
+    - "document"
+    - "page_number"
+    - "section_title"
+    - "relevance_score"
+    - "confidence_score"
+    
+  # Output optimization
+  compress_output: false         # Keep readable for debugging
+  validate_json: true           # Ensure valid JSON output
+  remove_duplicates: true       # Remove duplicate sections
+
+# ===================================================================
+# DEVELOPMENT & TESTING CONFIGURATION
+# ===================================================================
+development:
+  enable_debug_mode: false       # Set to true for development
+  save_intermediate_results: false  # For debugging
+  enable_profiling: false        # Performance profiling
+  mock_slow_operations: false    # Speed up testing
+  
+  # Test data paths
+  test_data_dir: "./input/test"
+  sample_output_dir: "./output/samples"
+  
+  # Validation settings
+  strict_validation: true        # Strict input validation
+  fail_fast: false              # Continue on non-critical errors
+
+# ===================================================================
+# VERSION INFORMATION
+# ===================================================================
+version_info:
+  config_version: "1.0.0"
+  round: "1B"
+  optimization_target: "universal_generalization"
+  performance_optimized: true
+  constraint_compliant: true
+  last_updated: "2025-01-17"
+  
+# ===================================================================
+# TOTAL CONFIGURATION SIZE: Optimized for <60s, <1GB, CPU-only
+# ESTIMATED PERFORMANCE: 6 documents/minute, 400x faster embeddings
+# GENERALIZATION: Works across ALL domains without hardcoding
+# ===================================================================
